@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
@@ -31,12 +31,16 @@
 		left: 0;
 		top: 0;
 	}
-	img {
+	/*img {
 		display: block;
 		margin: 0 auto;
-	}
+	}*/
 	.prev, .next {
 		position: absolute;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-o-user-select: none;
 		top: 0;
 		width: 50px;
 		height: 270px;
@@ -73,7 +77,7 @@
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/carousel.js"></script>
 	<script>
-	$(function(){
+	$(function() {
 		Carousel.init($(".main"));
 	})
 	</script>
