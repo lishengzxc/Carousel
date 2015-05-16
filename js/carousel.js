@@ -4,7 +4,8 @@
 		this.posterItemMain = poster.find("ul");
 		this.prevBtn = poster.find(".prev");
 		this.nextBtn = poster.find(".next");
-		this.posterFirstItem = this.posterItemMain.find("li").eq(0);
+		this.posterItems = poster.find("li")
+		this.posterFirstItem = this.posterItems.eq(0);
 
 		this.setting = {
 			'width':800,
@@ -48,7 +49,8 @@
 				height: this.setting.height
 			});
 			this.posterFirstItem.css({
-				left: w
+				left: w,
+				zIndex: Math.floor(this.posterItems.size() / 2)
 			});
 
 
