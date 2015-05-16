@@ -1,14 +1,16 @@
 ;(function($){
 	var Carousel = function(poster) {
+		var self = this;
 		this.poster = poster;
 		this.posterItemMain = poster.find("ul");
 		this.prevBtn = poster.find(".prev");
 		this.nextBtn = poster.find(".next");
 		this.posterItems = poster.find("li")
 		this.posterFirstItem = this.posterItems.eq(0);
+		this.posterLastItem = this.posterItems.last();
 
 		this.setting = {
-			'width': 800,
+			'width': 900,
 			'height': 270,
 			'posterWidth': 640,
 			'posterHeight': 270,
@@ -19,9 +21,64 @@
 		$.extend(this.setting, this.getSetting());
 		this.setSettingValue();
 		this.setPosterPos();
+
+		this.nextBtn.click(function(event) {
+			self.carouselRotate("left");
+		});
+
+		this.prevBtn.click(function(event) {
+			self.carouselRotate("right");
+		});
 	};
 
 	Carousel.prototype = {
+		carouselRotate: function(dir) {
+			var _this_ = this;
+			if (dir === "left") {
+				this.posterItems.each(function() {
+					var self = $(this);
+					var prev = self.prev().get(0) ? self.prev() : _this_.posterLastItem;
+					var width = prev.width();
+					var height = prev.height();
+					var zIndex = prev.css("zIndex");
+					var opacity = prev.css("opacity");
+					var left = prev.css("left");
+					var top = prev.css("top");
+
+					self.animate({
+						width: width,
+						height: height,
+						zIndex: zIndex,
+						opacity: opacity,
+						left: left,
+						top: top
+					}, _this_.setting.speed);
+
+				})
+			} else {
+				this.posterItems.each(function() {
+					var self = $(this);
+					var next = self.next().get(0) ? self.next() : _this_.posterFirstItem;
+					var width = next.width();
+					var height = next.height();
+					var zIndex = next.css("zIndex");
+					var opacity = next.css("opacity");
+					var left = next.css("left");
+					var top = next.css("top");
+
+					self.animate({
+						width: width,
+						height: height,
+						zIndex: zIndex,
+						opacity: opacity,
+						left: left,
+						top: top
+					}, _this_.setting.speed);
+
+				})
+			}
+		},
+
 		getSetting: function() {
 			var setting = this.poster.attr("data-setting");
 			if (setting && setting !== "") {
@@ -93,7 +150,6 @@
 			var lh = rightSlice.last().height();
 
 			leftSlice.each(function(j) {
-				// 
 				
 				$(this).css({
 					zIndex: rlevel,
@@ -107,9 +163,8 @@
 				lw = lw / _self_.setting.scale;
 				lh = lh / _self_.setting.scale;
 			})
-
-
-
+		},
+		setVerticalAlign: function() {
 
 		}
 	};
