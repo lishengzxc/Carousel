@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	ul {
+		list-style: none;
+	}
+	.prev {
+		left: 0;
+		background-image: url(img/prev.png);
+	}
+	.next {
+		right: 0;
+		background-image: url(img/next.png);
+	}
+	.main {
+		position: relative;
+		width: 800px;
+		height: 270px;
+	}
+	ul {
+		width: 800px;
+		height: 270px;
+		padding: 0;
+	}
+	li {
+		position: absolute;
+		width: 800px;
+		left: 0;
+		top: 0;
+	}
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+	.prev, .next {
+		position: absolute;
+		top: 0;
+		width: 50px;
+		height: 270px;
+		background-repeat: no-repeat;
+		background-position: center;
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<ul>
+			<li><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+		</ul>
+		<div class="prev"></div>
+		<div class="next"></div>
+	</div>
+	<!-- <div class="main">
+		<ul>
+			<li><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+		</ul>
+		<div class="prev"></div>
+		<div class="next"></div>
+	</div> -->
+
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/carousel.js"></script>
+	<script>
+	$(function(){
+		Carousel.init($(".main"));
+	})
+	</script>
+</body>
+</html>
