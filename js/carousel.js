@@ -8,7 +8,7 @@
 		this.posterFirstItem = this.posterItems.eq(0);
 
 		this.setting = {
-			'width':800,
+			'width': 800,
 			'height': 270,
 			'posterWidth': 640,
 			'posterHeight': 270,
@@ -18,6 +18,7 @@
 		};
 		$.extend(this.setting, this.getSetting());
 		this.setSettingValue();
+		this.setPosterPos();
 	};
 
 	Carousel.prototype = {
@@ -50,8 +51,63 @@
 			});
 			this.posterFirstItem.css({
 				left: w,
+				width: this.setting.posterWidth,
+				height: this.setting.posterHeight,
 				zIndex: Math.floor(this.posterItems.size() / 2)
 			});
+		},
+
+		setPosterPos: function() {
+			var _self_ = this;
+			var sliceItems = this.posterItems.slice(1);
+			var sliceSize = sliceItems.size();
+			var rightSlice = sliceItems.slice(0, sliceSize / 2);
+
+			var rlevel = Math.floor(this.posterItems.size() / 2);
+			var rw = this.setting.posterWidth;
+			var rh = this.setting.posterHeight;
+			var gap = (this.setting.width - this.setting.posterWidth) / 2 / rlevel;
+			var firstLeftR = (this.setting.width - this.setting.posterWidth) / 2
+			var fixOffsetLeft = firstLeftR + rw;
+
+
+			rightSlice.each(function(i) {
+				rlevel--;
+				rw = rw * _self_.setting.scale;
+				rh = rh * _self_.setting.scale;
+
+				$(this).css({
+					zIndex: rlevel,
+					width: rw,
+					height: rh,
+					opacity: 1 / (++i),
+					top: (_self_.setting.height - rh) / 2,
+					left: fixOffsetLeft + (i) * gap - rw
+				});
+			});
+
+			var leftSlice = sliceItems.slice(sliceSize / 2);
+
+			var llevel = Math.floor(this.posterItems.size() / 2);
+			var lw = rightSlice.last().width();
+			var lh = rightSlice.last().height();
+
+			leftSlice.each(function(j) {
+				// 
+				
+				$(this).css({
+					zIndex: rlevel,
+					width: lw,
+					height: lh,
+					opacity: 1 / llevel,
+					top: (_self_.setting.height - lh) / 2,
+					left: j * gap
+				});
+				llevel--;
+				lw = lw / _self_.setting.scale;
+				lh = lh / _self_.setting.scale;
+			})
+
 
 
 
