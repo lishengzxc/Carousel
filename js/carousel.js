@@ -19,7 +19,7 @@
             'verticalAlign': 'middle',
             'scale': 0.9,
             'speed': 500,
-            'autoPlay': false,
+            'autoPlay': true,
             'delay': 3000
         };
         $.extend(this.setting, this.getSetting());
