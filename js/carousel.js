@@ -6,10 +6,18 @@
         this.posterItemMain = poster.find("ul");
         this.prevBtn = poster.find(".prev");
         this.nextBtn = poster.find(".next");
-        this.posterItems = poster.find("li")
+        this.posterItems = poster.find("li");
+
+        if (this.posterItems.size() % 2 == 0) {
+            this.posterItemMain.append(this.posterItems.eq(0).clone());
+            this.posterItems = this.posterItemMain.children();
+        }
+
         this.posterFirstItem = this.posterItems.eq(0);
         this.posterLastItem = this.posterItems.last();
         this.rotateFlag = true;
+
+        
 
         this.setting = {
             'width': 900,
