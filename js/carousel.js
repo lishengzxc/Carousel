@@ -18,7 +18,9 @@
             'posterHeight': 270,
             'verticalAlign': 'middle',
             'scale': 0.9,
-            'speed': 500
+            'speed': 500,
+            'autoPlay': false,
+            'delay': 3000
         };
         $.extend(this.setting, this.getSetting());
         this.setSettingValue();
@@ -38,6 +40,11 @@
                 self.carouselRotate("right");
             }
         });
+        if (this.setting.autoPlay) {
+            window.setInterval(function() {
+                self.carouselRotate("left");
+            }, this.setting.delay);
+        }
     };
 
     Carousel.prototype = {
@@ -85,7 +92,7 @@
                         left: left,
                         top: top
                     }, _this_.setting.speed, function() {
-                    	_this_.rotateFlag = true;
+                        _this_.rotateFlag = true;
                     });
 
                 })
